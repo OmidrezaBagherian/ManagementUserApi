@@ -85,3 +85,20 @@ func UpdateUser(context *gin.Context) {
 		"user": user,
 	})
 }
+
+func DeleteUser(context *gin.Context) {
+	var user models.User
+	error := connect.DB.Where("id=?", context.Param("id")).First(&user).Error
+	if error != nil {
+		context.JSON(http.StatusBadRequest, gin.H{
+			"error": "Not Found",
+		})
+		return
+	}
+
+	connect.DB.Delete(&user)
+
+	context.JSON(http.StatusOK, gin.H{
+		"user": user,
+	})
+}
