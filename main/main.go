@@ -12,6 +12,7 @@ func main() {
 	connect.ConnectDatabase()
 
 	route.GET("/users", controllers.GetUser)
+	route.POST("/users", controllers.PostUser)
 
 	route.Run()
 }

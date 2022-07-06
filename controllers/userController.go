@@ -15,3 +15,29 @@ func GetUser(context *gin.Context) {
 		"user": users,
 	})
 }
+
+func PostUser(context *gin.Context) {
+
+	var input models.CreateUser
+
+	error := context.ShouldBindJSON(&input)
+
+	if error != nil {
+		context.JSON(http.StatusBadRequest, gin.H{
+			"error": error.Error(),
+		})
+		return
+	}
+
+	user := models.User{
+		Name:  input.Name,
+		Email: input.Email,
+		Age:   input.Age,
+	}
+
+	connect.DB.Create(&user)
+
+	context.JSON(http.StatusOK, gin.H{
+		"user": user,
+	})
+}
