@@ -12,3 +12,9 @@ type CreateUser struct {
 	Email string `json:"email" binding:"required"`
 	Age   uint8  `json:"age" binding:"required"`
 }
+
+type UpdateUser struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+	Age   uint8  `json:"age"`
+}
