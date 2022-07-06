@@ -13,6 +13,7 @@ func main() {
 
 	route.GET("/users", controllers.GetUser)
 	route.POST("/users", controllers.PostUser)
+	route.GET("/users/:id", controllers.FindUser)
 
 	route.Run()
 }

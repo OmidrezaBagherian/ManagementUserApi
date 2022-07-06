@@ -41,3 +41,18 @@ func PostUser(context *gin.Context) {
 		"user": user,
 	})
 }
+
+func FindUser(context *gin.Context) {
+	var user models.User
+	error := connect.DB.Where("id=?", context.Param("id")).First(&user).Error
+	if error != nil {
+		context.JSON(http.StatusBadRequest, gin.H{
+			"error": "Not Found",
+		})
+		return
+	}
+	context.JSON(http.StatusOK, gin.H{
+		"user": user,
+	})
+
+}
